@@ -70,13 +70,13 @@ void getcmd(const Block *block, char *output)
   if (*button)
   {
     setenv("BUTTON", button, 1);
-    cmdf = popen(cmd,"r");
+    cmdf = popen(cmdf,"r");
     *button = '\0';
     unsetenv("BUTTON");
   }
   else
   {
-    cmdf = popen(cmd,"r");
+    cmdf = popen(cmdf,"r");
   }
 	if (!cmdf)
 		return;
