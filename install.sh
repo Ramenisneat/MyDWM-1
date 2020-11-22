@@ -2,6 +2,7 @@
 CWD=`pwd`
 
 # Install dependencies
+sudo pacman -S sc iw alsa-utils
 if command -v yay &> /dev/null
 then
   # I personally dont use yay, sorry if this is incorrect.

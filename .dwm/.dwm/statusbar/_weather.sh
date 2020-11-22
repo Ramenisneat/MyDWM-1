@@ -2,7 +2,7 @@
 
 # Weather info
 
-TEMP="$(curl -s curl -s http://wttr.in/Flint+TX?format\=1\&u)"
+TEMP="$(curl -s http://wttr.in/Flint_TX?format=1)"
 
 [ "$TEMP" ] && 
 TEMP=$(echo $TEMP | sed 's/[^0-9+°A-Z\-]//g') &&
