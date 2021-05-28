@@ -1,14 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 20;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 1;
 static const int user_bh            = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 
-static const char *fonts[]          = { "Fantasque Sans Mono Nerd Font:size=14:antialias=true:autohint=true", };
+static const char *fonts[]          = { "NIS_CMS7:size=12:antialias=true:autohint=true", };
 
 // Colors
 static const char col_gb_black[]	= "#131515";
@@ -104,11 +106,12 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	// Applications
 	{ MODKEY|ShiftMask,				XK_d,	   spawn,		   SHCMD("discord") },
-	{ MODKEY|ShiftMask,				XK_e,	   spawn,		   SHCMD("qutebrowser") },
+	{ MODKEY|ShiftMask,				XK_e,	   spawn,		   SHCMD("google-chrome-stable") },
 	{ MODKEY|ShiftMask,				XK_h,	   spawn,		   SHCMD("kitty htop") },
 	{ MODKEY|ShiftMask,				XK_r,	   spawn,		   SHCMD("nautilus") },
 
@@ -120,14 +123,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 
 	// Multimedia
-	{ MODKEY,                       XK_F1,     spawn,          SHCMD("pulseaudio-ctl down 5 ; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,                       XK_F2,     spawn,          SHCMD("pulseaudio-ctl up 5 ; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,                       XK_F3,     spawn,          SHCMD("pulseaudio-ctl mute ; kill -44 $(pidof dwmblocks)") },
+	{ 0,                       XF86XK_AudioLowerVolume,   spawn,          SHCMD("pulseaudio-ctl down 5 ; kill -44 $(pidof dwmblocks)") },
+	{ 0,                       XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pulseaudio-ctl up 5 ; kill -44 $(pidof dwmblocks)") },
+	{ 0,                      	XF86XK_AudioMute,          spawn,          SHCMD("pulseaudio-ctl mute ; kill -44 $(pidof dwmblocks)") },
 
   // Prompts
-  { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("~/.scripts/prompt \"Shutdown? \" \"shutdown now\"") },
+  { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("~/.scripts/prompt \"Shutdown? \" poweroff") },
   { MODKEY|ControlMask,		  XK_x,	     spawn,	     SHCMD("~/.scripts/prompt \"Exit DWM? \" \"killall xinit\"") },
-  { MODKEY,		XK_x,	spawn,	SHCMD("~/.scripts/prompt \"Restart DWM? \" \"killall xinit && startx\"") },
+  { MODKEY,		          XK_x,	     spawn,	  SHCMD("~/.scripts/prompt \"Restart DWM? \" \"killall xinit && startx\"") },
+  { MODKEY,                       XK_d,      spawn,         SHCMD("bright up 100")},
+  { MODKEY,                       XK_c,      spawn,          SHCMD("bright down 100")},
 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -161,6 +166,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	
 };
 
 /* button definitions */
